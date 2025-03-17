@@ -4,7 +4,7 @@
 Please note that there is a Serve deployment config file example under resource directory. you can refer to it when necessary.
 
 ### Prerequisites:
-* Ensure you have enabled GPU support for Ray (https://github.com/HPEEzmeral/ezua-tutorials/blob/feature/fy24-q3/Data-Science/Ray/Ray-GPU/README.md) as vLLM requiers GPU to run (https://vllm.readthedocs.io/en/latest/getting_started/installation.html)
+* Ensure you have enabled GPU support for Ray (https://github.com/HPEEzmeral/aie-tutorials/blob/aie-1.7.0/Data-Science/Ray/Ray-GPU/README.md) as vLLM requiers GPU to run (https://vllm.readthedocs.io/en/latest/getting_started/installation.html)
 * Checkout Ray-GPU example from tutorials on how to enable GPU support for Ray
 * With GPU support configured, create a `jupyter-tensorflow-cuda-full` notebook environment in Kubeflow.
 * Ray client and server versions must match. Typically, `ray --version` can be used to verify the installed version.
