@@ -32,7 +32,7 @@ dag = DAG(
             description="Provide Python-Spark image url",
         ),
         "spark_image_version": Param(
-            "3.5.2",
+            "3.5.5",
             type=["null", "string"],
             description="Provide Spark image Version",
         )
