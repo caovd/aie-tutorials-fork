@@ -18,9 +18,9 @@ spec:
     spark.rapids.shims-provider-override: "com.nvidia.spark.rapids.shims.spark352.SparkShimServiceProvider"
 
   type: Scala
-  sparkVersion: 3.5.2
+  sparkVersion: 3.5.5
   mode: cluster
-  image: lr1-bd-harbor-registry.mip.storage.hpecorp.net/develop/hpe-spark/spark:v3.5.2.3.0
+  image: lr1-bd-harbor-registry.mip.storage.hpecorp.net/develop/hpe-spark/spark:v3.5.5.2.1
   imagePullPolicy: Always
   mainApplicationFile: "local:///mounts/shared-volume/shared/aie-tutorials/current-release/Data-Analytics/Spark-GPU/Scala/SparkExamples.jar"
   mainClass: com.hpe.examples.spark.sql.SqlOnGpuExample
@@ -33,7 +33,7 @@ spec:
     coreLimit: "1000m"
     memory: "1024m"
     labels:
-      version: 3.5.2
+      version: 3.5.5
     volumeMounts:
       - name: shared-volume
         mountPath: /mounts/shared-volume
@@ -46,7 +46,7 @@ spec:
       name: "nvidia.com/gpu"
       quantity: 1
     labels:
-      version: 3.5.2
+      version: 3.5.5
     volumeMounts:
       - name: shared-volume
         mountPath: /mounts/shared-volume
