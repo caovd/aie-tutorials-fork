@@ -1,13 +1,13 @@
+from __future__ import annotations
+
 import os
+from datetime import datetime
+
 from airflow import DAG
-from airflow.models.param import Param
+from airflow.models.param import Param, ParamsDict
 from airflow.providers.cncf.kubernetes.operators.spark_kubernetes import (
     SparkKubernetesOperator,
 )
-from airflow.providers.cncf.kubernetes.sensors.spark_kubernetes import (
-    SparkKubernetesSensor,
-)
-from datetime import datetime
 
 default_args = {
     "owner": "airflow",
@@ -24,33 +24,25 @@ dag = DAG(
     "spark_pi",
     default_args=default_args,
     schedule=None,
-    tags=["ezaf", "spark", "pi"],
-    params={
-        "registry_url": Param(
-            os.environ.get("AIRGAP_REGISTRY"),
-            type=["string"],
-            pattern=r"^\S+/$",
-            description="Input your registry url. Trailing slash in the end is required",
-        ),
-    },
+    tags=["example", "aie", "spark", "pi"],
+    params=ParamsDict(
+        {
+            "registry_url": Param(
+                os.environ.get("AIRGAP_REGISTRY"),
+                type=["string"],
+                pattern=r"^\S+/$",
+                description="Input your registry url. Trailing slash in the end is required",
+            ),
+        }
+    ),
     render_template_as_native_obj=True,
-    access_control={"All": {"can_read", "can_edit", "can_delete"}},
+    access_control={"All": {"DAGs": {"can_read", "can_edit", "can_delete"}}},
 )
 
 submit = SparkKubernetesOperator(
     task_id="submit",
     application_file="example_spark_pi.yaml",
-    # do_xcom_push=True,
     delete_on_termination=False,
     dag=dag,
     enable_impersonation_from_ldap_user=True,
 )
-
-# sensor = SparkKubernetesSensor(
-#     task_id="monitor",
-#     application_name="{{ task_instance.xcom_pull(task_ids='submit')['metadata']['name'] }}",
-#     dag=dag,
-#     attach_log=True,
-# )
-
-# submit >> sensor
