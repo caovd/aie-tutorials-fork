@@ -23,20 +23,22 @@ default_args = {
 dag = DAG(
     "spark_pi_oss",
     default_args=default_args,
-    schedule_interval=None,
-    tags=["ezaf", "spark", "pi"],
-    params={
-        "spark_image_url": Param(
-           f"{os.environ.get('AIRGAP_REGISTRY')}hpe-spark/apache-spark:v3.5.5.1",
-            type=["string"],
-            description="Provide Python-Spark image url",
-        ),
-        "spark_image_version": Param(
-            "3.5.5.1",
-            type=["null", "string"],
-            description="Provide Spark image Version",
-        )
-    },
+    schedule=None,
+    tags=["example", "aie", "spark", "pi"],
+    params=ParamsDict(
+        {
+            "spark_image_url": Param(
+                f"{os.environ.get('AIRGAP_REGISTRY')}hpe-spark/apache-spark:v3.5.5.1",
+                type=["string"],
+                description="Provide Python-Spark image url",
+            ),
+            "spark_image_version": Param(
+                "3.5.5i.1",
+                type=["null", "string"],
+                description="Provide Spark image Version",
+            ),
+        }
+    ),
     render_template_as_native_obj=True,
     access_control={"All": {"DAGs": {"can_read", "can_edit", "can_delete"}}},
 )
