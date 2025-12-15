@@ -1,15 +1,13 @@
-apiVersion: "serving.kserve.io/v1beta1"
-kind: "InferenceService"
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
 metadata:
-  name: "gpu-mnist-inferenceservice"
+  name: gpu-mnist-inferenceservice
 spec:
   predictor:
     serviceAccountName: kserve-local-s3
-    model:
-      modelFormat:
-        name: tensorflow
+    tensorflow:
       protocolVersion: v2
-      storageUri: ""
+      storageUri: s3://mlflow.rag-cluster01/<experiment_id>/<run_id>/artifacts/model
       resources:
         limits:
           nvidia.com/gpu: 1
