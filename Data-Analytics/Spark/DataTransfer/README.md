@@ -36,4 +36,4 @@ By default, the workflow consists of these steps:
 
 3. Review the entire yaml for any discrepancy and click on Create Spark Application.
 
-4. Watch the logs for expected output, it would create parquet file at the destination folder in this case `file:///mounts/shared-volume/mnist-spark-data`.
+4. Watch the logs for expected output, it would create parquet file at the destination folder in this case `file:///mnt/user/mnist-spark-data/<dag_run_id>`.
